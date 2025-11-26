@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_app">#F5F7FA</color>
+    <color name="bg_light">#F8F9FD</color>
+    <color name="bg_light_gray">#F5F5F5</color>
+    <color name="text_dark">#1A1A1A</color>
+    <color name="text_gray">#808080</color>
+    <color name="primary_green">#4EDA88</color>
+    <color name="income_green">#4CAF50</color>
+    <color name="expense_red">#FF5252</color>
+    <color name="primary_pink">#F48FB1</color>
+    <color name="primary_blue">#BBDEFB</color>
+    <color name="chart_yellow">#FFD700</color>
+    <color name="chart_purple">#E1BEE7</color>
+    <color name="chart_blue">#90CAF9</color>
+    <color name="chip_bg_selected">#D1F5E0</color>
+    <color name="chip_text_selected">#2E7D32</color>
+    <color name="chip_bg_normal">#E0E5EC</color>
+    <color name="bg_tab_unselected">#E0E5EC</color>
+    <color name="tab_unselected">#E0E5EC</color>
+    <color name="tab_selected">#FFFFFF</color>
+</resources>
