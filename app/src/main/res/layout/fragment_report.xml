@@ -466,13 +466,7 @@
                             android:layout_weight="1"
                             android:layout_marginStart="12dp"
                             android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/tv_travel_label"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Đi lại"
-                                android:textColor="@color/text_dark"
-                                android:textSize="16sp"/>
+
                             <TextView
                                 android:id="@+id/tv_travel_percent"
                                 android:layout_width="wrap_content"
@@ -480,6 +474,14 @@
                                 android:text="25%"
                                 android:textSize="12sp"
                                 android:textColor="@color/text_gray"/>
+
+                            <TextView
+                                android:id="@+id/tv_travel_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Đi lại"
+                                android:textColor="@color/text_dark"
+                                android:textSize="16sp" />
                         </LinearLayout>
 
                         <TextView
