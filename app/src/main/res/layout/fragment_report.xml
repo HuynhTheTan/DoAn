@@ -114,6 +114,7 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,7 +147,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="4.500.000đ"
+                            android:text="0đ"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="@color/text_dark"/>
@@ -178,7 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="6.000.000đ"
+                            android:text="0đ"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="@color/text_dark"/>
@@ -204,14 +205,14 @@
                         android:id="@+id/tv_balance_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Chênh lệch"
+                        android:text="Chênh lệch (Thu - Chi)"
                         android:textColor="@color/text_gray"/>
                     <TextView
                         android:id="@+id/tv_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="+1.500.000đ"
+                        android:text="0đ"
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:textColor="@color/income_green"/>
@@ -252,7 +253,7 @@
                             android:id="@+id/tv_trend_amount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4.500.000đ"
+                            android:text="0đ"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_dark"/>
@@ -260,7 +261,7 @@
                             android:id="@+id/tv_trend_month"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" Tháng 11"
+                            android:text=" (Tháng này)"
                             android:textColor="@color/text_gray"/>
                     </LinearLayout>
 
@@ -282,10 +283,9 @@
                             android:orientation="vertical">
                             <View
                                 android:id="@+id/bar_week1"
-                                android:layout_width="60dp"
-                                android:layout_height="80dp"
+                                android:layout_width="40dp"
+                                android:layout_height="10dp"
                                 android:background="@drawable/bg_bar_rounded"/>
-
                             <TextView
                                 android:id="@+id/tv_week1"
                                 android:layout_width="wrap_content"
@@ -299,13 +299,20 @@
                         <LinearLayout
                             android:id="@+id/ll_week2"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="bottom|center_horizontal">
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+                            <View
+                                android:id="@+id/bar_week2"
+                                android:layout_width="40dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/bg_bar_rounded"/>
                             <TextView
                                 android:id="@+id/tv_week2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
                                 android:text="Tuần 2"
                                 android:textSize="12sp"
                                 android:textColor="@color/text_gray"/>
@@ -320,10 +327,9 @@
                             android:orientation="vertical">
                             <View
                                 android:id="@+id/bar_week3"
-                                android:layout_width="60dp"
-                                android:layout_height="40dp"
+                                android:layout_width="40dp"
+                                android:layout_height="10dp"
                                 android:background="@drawable/bg_bar_rounded"/>
-
                             <TextView
                                 android:id="@+id/tv_week3"
                                 android:layout_width="wrap_content"
@@ -337,13 +343,20 @@
                         <LinearLayout
                             android:id="@+id/ll_week4"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="bottom|center_horizontal">
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+                            <View
+                                android:id="@+id/bar_week4"
+                                android:layout_width="40dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/bg_bar_rounded"/>
                             <TextView
                                 android:id="@+id/tv_week4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
                                 android:text="Tuần 4"
                                 android:textSize="12sp"
                                 android:textColor="@color/text_gray"/>

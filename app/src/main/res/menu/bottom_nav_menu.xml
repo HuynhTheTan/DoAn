@@ -7,14 +7,14 @@
         android:title="Trang chủ" />
 
     <item
+        android:id="@+id/nav_transaction"
+        android:icon="@drawable/ic_wallet"
+        android:title="Giao dịch" />
+
+    <item
         android:id="@+id/nav_report"
         android:icon="@drawable/ic_chart"
         android:title="Báo cáo" />
-
-    <item
-        android:id="@+id/nav_wallet"
-        android:icon="@drawable/ic_wallet"
-        android:title="Giao dịch" />
 
     <item
         android:id="@+id/nav_profile"

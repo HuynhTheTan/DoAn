@@ -1,29 +1,37 @@
 package com.example.do_an.fragment;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.do_an.R;
+import com.example.do_an.adapter.AnalysisAdapter;
+import com.example.do_an.dao.ExpenseDAO;
+import com.example.do_an.model.Expense;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReportFragment extends Fragment {
 
-    private TextView tvWeek, tvMonth, tvYear;
-    private CardView cardWeek, cardMonth, cardYear;
+    // View
+    private TextView tvTotalIncome, tvTotalExpense, tvBalance;
+    private TextView tvTrendAmount;
+    private RecyclerView rcvAllocation;
 
-    public ReportFragment() {
-    }
+    // Data
+    private ExpenseDAO expenseDAO;
+    private AnalysisAdapter analysisAdapter;
+    private DecimalFormat formatter = new DecimalFormat("#,###đ");
 
     @Nullable
     @Override
@@ -35,58 +43,56 @@ public class ReportFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvWeek = view.findViewById(R.id.tv_week);
-        tvMonth = view.findViewById(R.id.tv_month);
-        tvYear = view.findViewById(R.id.tv_year);
+        initViews(view);
+        expenseDAO = new ExpenseDAO(requireContext());
+        setupRecyclerView();
+    }
 
-        cardWeek = view.findViewById(R.id.card_week);
-        cardMonth = view.findViewById(R.id.card_month);
-        cardYear = view.findViewById(R.id.card_year);
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadStatistics();
+    }
 
-        cardWeek.setOnClickListener(v -> {
-            updateTabUI(cardWeek, tvWeek); // Hàm cập nhật giao diện
-            Toast.makeText(getContext(), "Đã chọn: Tuần", Toast.LENGTH_SHORT).show();
-            // TODO: Load dữ liệu báo cáo theo TUẦN ở đây
-        });
+    private void initViews(View view) {
+        tvTotalIncome = view.findViewById(R.id.tv_total_income);
+        tvTotalExpense = view.findViewById(R.id.tv_total_expense);
+        tvBalance = view.findViewById(R.id.tv_balance);
+        tvTrendAmount = view.findViewById(R.id.tv_trend_amount);
+        rcvAllocation = view.findViewById(R.id.rcv_allocation);
+    }
 
-        cardMonth.setOnClickListener(v -> {
-            updateTabUI(cardMonth, tvMonth);
-            Toast.makeText(getContext(), "Đã chọn: Tháng", Toast.LENGTH_SHORT).show();
-            // TODO: Load dữ liệu báo cáo theo THÁNG ở đây
-        });
+    private void setupRecyclerView() {
+        rcvAllocation.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Dùng list rỗng ban đầu
+        analysisAdapter = new AnalysisAdapter(getContext(), new ArrayList<>());
+        rcvAllocation.setAdapter(analysisAdapter);
+    }
 
-        cardYear.setOnClickListener(v -> {
-            updateTabUI(cardYear, tvYear);
-            Toast.makeText(getContext(), "Đã chọn: Năm", Toast.LENGTH_SHORT).show();
-            // TODO: Load dữ liệu báo cáo theo NĂM ở đây
-        });
+    private void loadStatistics() {
+        // 1. Tính tổng
+        long totalIncome = expenseDAO.getTotalAmountByType(1); // Thu
+        long totalExpense = expenseDAO.getTotalAmountByType(0); // Chi
+        long balance = totalIncome - totalExpense;
 
-        View btnBack = view.findViewById(R.id.btn_back);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> Toast.makeText(getContext(), "Nút Back", Toast.LENGTH_SHORT).show());
+        // 2. Hiển thị lên giao diện
+        tvTotalIncome.setText(formatter.format(totalIncome));
+        tvTotalExpense.setText(formatter.format(totalExpense));
+        tvTrendAmount.setText(formatter.format(totalExpense)); // Xu hướng tạm thời lấy tổng chi
+
+        // Xử lý màu sắc số dư
+        tvBalance.setText(formatter.format(balance));
+        if (balance >= 0) {
+            tvBalance.setText("+" + formatter.format(balance));
+            tvBalance.setTextColor(getResources().getColor(R.color.income_green));
+        } else {
+            tvBalance.setTextColor(getResources().getColor(R.color.expense_red));
         }
 
-        TextView tvTotalExpense = view.findViewById(R.id.tv_total_expense);
-        if(tvTotalExpense != null) tvTotalExpense.setText("4.500.000đ");
-    }
-
-    private void updateTabUI(CardView selectedCard, TextView selectedText) {
-        resetTab(cardWeek, tvWeek);
-        resetTab(cardMonth, tvMonth);
-        resetTab(cardYear, tvYear);
-
-        selectedCard.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white));
-        selectedCard.setCardElevation(6f); // 2dp ~ 6f
-
-        selectedText.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_dark));
-        selectedText.setTypeface(null, Typeface.BOLD);
-    }
-
-    private void resetTab(CardView card, TextView text) {
-        card.setCardBackgroundColor(Color.TRANSPARENT);
-        card.setCardElevation(0f);
-
-        text.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_gray));
-        text.setTypeface(null, Typeface.NORMAL);
+        // 3. Load danh sách phân bổ (Tạm thời lấy list chi tiêu gần đây)
+        // Khi nào có chức năng danh mục, sẽ thay bằng query GROUP BY category
+        List<Expense> list = expenseDAO.getExpenses(10);
+        analysisAdapter = new AnalysisAdapter(getContext(), list);
+        rcvAllocation.setAdapter(analysisAdapter);
     }
 }

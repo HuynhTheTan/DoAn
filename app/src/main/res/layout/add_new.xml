@@ -127,7 +127,9 @@
                     app:cardBackgroundColor="@color/white"
                     android:layout_marginBottom="20dp">
 
+                    <!-- THÊM ID: et_expense_amount -->
                     <EditText
+                        android:id="@+id/et_expense_amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
@@ -157,7 +159,9 @@
                     app:cardElevation="0dp"
                     android:layout_marginBottom="20dp">
 
+                    <!-- THÊM ID: et_expense_desc -->
                     <EditText
+                        android:id="@+id/et_expense_desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
@@ -182,6 +186,7 @@
                     app:cardElevation="0dp"
                     android:layout_marginBottom="20dp">
 
+                    <!-- Đã có ID: tv_expense_date -->
                     <TextView
                         android:id="@+id/tv_expense_date"
                         android:layout_width="match_parent"
@@ -195,7 +200,9 @@
                         app:drawableTint="@color/text_dark"/>
                 </androidx.cardview.widget.CardView>
 
+                <!-- THÊM ID: btn_save_expense -->
                 <Button
+                    android:id="@+id/btn_save_expense"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Lưu Chi Tiêu"
@@ -231,7 +238,9 @@
                     app:cardBackgroundColor="@color/white"
                     android:layout_marginBottom="20dp">
 
+                    <!-- THÊM ID: et_income_amount -->
                     <EditText
+                        android:id="@+id/et_income_amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
@@ -261,7 +270,9 @@
                     app:cardElevation="0dp"
                     android:layout_marginBottom="20dp">
 
+                    <!-- THÊM ID: et_income_desc -->
                     <EditText
+                        android:id="@+id/et_income_desc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
@@ -286,6 +297,7 @@
                     app:cardElevation="0dp"
                     android:layout_marginBottom="20dp">
 
+                    <!-- Đã có ID: tv_income_date -->
                     <TextView
                         android:id="@+id/tv_income_date"
                         android:layout_width="match_parent"
@@ -299,7 +311,9 @@
                         app:drawableTint="@color/text_dark"/>
                 </androidx.cardview.widget.CardView>
 
+                <!-- THÊM ID: btn_save_income -->
                 <Button
+                    android:id="@+id/btn_save_income"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Lưu Thu Nhập"

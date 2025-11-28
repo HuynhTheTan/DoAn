@@ -1,53 +1,61 @@
 package com.example.do_an;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import com.example.do_an.fragment.HomeFragment;
 import com.example.do_an.fragment.ReportFragment;
 import com.example.do_an.fragment.TransactionFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import com.example.do_an.fragment.HomeFragment;
-
 public class MainActivity extends AppCompatActivity {
+
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        replaceFragment(new HomeFragment());
+        bottomNav = findViewById(R.id.bottom_nav);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        // Mặc định load HomeFragment khi mở app
+        if (savedInstanceState == null) {
+            loadFragment(new HomeFragment());
+        }
 
-            int id = item.getItemId();
+        // Bắt sự kiện click vào menu
+        bottomNav.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
 
-            if (id == R.id.nav_home) {
-                replaceFragment(new HomeFragment());
-
-            } else if (id == R.id.nav_report) {
-                replaceFragment(new ReportFragment());
-
-            } else if (id == R.id.nav_wallet) {
-                replaceFragment(new TransactionFragment());
-
-            } else if (id == R.id.nav_profile) {
+            if (itemId == R.id.nav_home) {
+                selectedFragment = new HomeFragment();
+            } else if (itemId == R.id.nav_transaction) { // Lưu ý: ID này phải khớp với bottom_nav_menu.xml
+                selectedFragment = new TransactionFragment();
+            } else if (itemId == R.id.nav_report) {
+                selectedFragment = new ReportFragment();
+            } else if (itemId == R.id.nav_profile) {
+                // Tạm thời chưa có Profile, dùng Home đỡ hoặc tạo Fragment rỗng
+                selectedFragment = new HomeFragment();
             }
 
+            if (selectedFragment != null) {
+                loadFragment(selectedFragment);
+            }
             return true;
         });
+
+        // Setup Floating Action Button ở HomeFragment hoạt động
+        // (Logic chuyển màn hình đã nằm trong HomeFragment rồi)
     }
 
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit();
     }
-
 }

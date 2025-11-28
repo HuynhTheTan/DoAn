@@ -127,7 +127,7 @@
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_transaction"
-                tools:itemCount="3" />
+                tools:itemCount="6" />
         </LinearLayout>
     </ScrollView>
 
